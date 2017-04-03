@@ -1,9 +1,11 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 3/7/2017.
  */
-public class Client extends BaseEntity<Long> {
+public class Client extends BaseEntity<Long> implements Serializable{
     //region Fields
     private String name;
     private int age;

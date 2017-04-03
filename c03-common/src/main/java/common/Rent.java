@@ -1,9 +1,10 @@
 package common;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
  * Created by user on 3/13/2017.
  */
-public class Rent extends BaseEntity<Long> {
+public class Rent extends BaseEntity<Long> implements Serializable {
     //region Fields
 //    Client client;
 //    Movie movie;

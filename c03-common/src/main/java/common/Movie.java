@@ -1,9 +1,11 @@
 package common;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 3/5/2017.
  */
-public class Movie extends BaseEntity<Long> {
+public class Movie extends BaseEntity<Long> implements Serializable {
     //region Fields
     private String name;
     private String director;
