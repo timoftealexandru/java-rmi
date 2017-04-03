@@ -17,12 +17,8 @@ import java.util.stream.StreamSupport;
  */
 
 public class MovieServiceImpl implements MovieService {
-
-    String url = "jdbc:postgresql://localhost:5432/postgres";
-    String username = "postgres";
-    String password = "123456";
     private MovieValidator movieValidator = new MovieValidator();
-    private MovieDBRepository repository = new MovieDBRepository(movieValidator,url,username,password);
+    private MovieDBRepository repository = new MovieDBRepository(movieValidator);
 
     public MovieServiceImpl() {
 

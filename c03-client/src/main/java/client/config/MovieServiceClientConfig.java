@@ -22,7 +22,7 @@ public class MovieServiceClientConfig {
     }
 
     @Bean
-    MovieServiceClient MovieServiceClient(){
+    public MovieServiceClient MovieServiceClient(){
         return new MovieServiceClient();
     }
 }

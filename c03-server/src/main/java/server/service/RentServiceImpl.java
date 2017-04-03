@@ -16,12 +16,8 @@ import java.util.stream.StreamSupport;
  * Created by paul on 3/13/2017.
  */
 public class RentServiceImpl implements RentService {
-
-    String url = "jdbc:postgresql://localhost:5432/postgres";
-    String username = "postgres";
-    String password = "123456";
     private RentValidator rentValidator = new RentValidator();
-    private RentDBRepository repository = new RentDBRepository(rentValidator,url,username,password);
+    private RentDBRepository repository = new RentDBRepository(rentValidator);
 
     public RentServiceImpl(){
 

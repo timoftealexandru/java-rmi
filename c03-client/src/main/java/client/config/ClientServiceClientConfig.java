@@ -22,7 +22,7 @@ public class ClientServiceClientConfig {
     }
 
     @Bean
-    ClientServiceClient ClientServiceClient(){
+    public ClientServiceClient ClientServiceClient(){
         return new ClientServiceClient();
     }
 }

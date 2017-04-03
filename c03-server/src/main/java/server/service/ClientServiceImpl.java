@@ -15,15 +15,10 @@ import java.util.stream.StreamSupport;
  * Created by paul on 3/13/2017.
  */
 public class ClientServiceImpl implements ClientService{
-
-    String url = "jdbc:postgresql://localhost:5432/postgres";
-    String username = "postgres";
-    String password = "123456";
     private ClientValidator clientValidator = new ClientValidator();
-    private ClientDBRepository repository = new ClientDBRepository(clientValidator,url,username,password);
+    private ClientDBRepository repository = new ClientDBRepository(clientValidator);
 
     public ClientServiceImpl() {
-
     }
 
     public void addClient(Client cl) {

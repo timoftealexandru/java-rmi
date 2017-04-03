@@ -20,7 +20,7 @@ public class RentServiceClientConfig {
     }
 
     @Bean
-    RentServiceClient RentServiceClient(){
+    public RentServiceClient RentServiceClient(){
         return new RentServiceClient();
     }
 }
