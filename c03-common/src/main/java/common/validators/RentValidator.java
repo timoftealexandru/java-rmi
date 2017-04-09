@@ -9,11 +9,8 @@ public class RentValidator implements Validator<Rent> {
 
     @Override
     public void validate(Rent rent) throws ValidatorException{
-        if(rent.getId()<0){
-            throw new ValidatorException("Rent ID must be positive!");
-        }
-        if(rent.getClientId()<0){
-            throw new ValidatorException("Client ID must be positive!");
+       if(rent.getClientCnp()<0){
+            throw new ValidatorException("Client Cnp must be positive!");
         }
 
         if(rent.getMovieId()<0){

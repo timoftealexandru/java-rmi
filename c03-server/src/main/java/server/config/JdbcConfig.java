@@ -12,8 +12,6 @@ import javax.sql.DataSource;
  * Created by Nicu on 4/2/17.
  */
 
-
-
 @Configuration
 public class JdbcConfig {
 
@@ -27,11 +25,10 @@ public class JdbcConfig {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(Driver.class.getName());
         dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        dataSource.setUsername(System.getProperty("postgres"));
-        dataSource.setPassword(System.getProperty("123456"));
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("123456");
         dataSource.setInitialSize(2);
         dataSource.setMaxActive(5);
         return dataSource;
-
     }
 }

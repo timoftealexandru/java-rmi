@@ -6,8 +6,11 @@ import client.service.RentServiceClient;
 import common.Client;
 import common.Movie;
 import common.Rent;
+
 import common.validators.RentalException;
 import common.validators.ValidatorException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.io.BufferedReader;
@@ -19,22 +22,52 @@ import java.util.Set;
 /**
  * Created by Nicu on 3/5/2017.
  */
-
+@Component
 public class Console {
     // region Fields
+    @Autowired
     private MovieServiceClient movieService;
+
+    @Autowired
     private ClientServiceClient clientService;
+
+    @Autowired
     private RentServiceClient rentService;
     //endregion
 
+
     //region Constructor
-    public Console(MovieServiceClient ms, ClientServiceClient cs, RentServiceClient rs ) {
-        this.movieService = ms;
-        this.clientService = cs;
-        this.rentService = rs;
+    public Console() {
+
     }
 
     //endregion
+
+    public MovieServiceClient getMovieService() {
+        return movieService;
+    }
+
+    public void setMovieService(MovieServiceClient movieService) {
+        this.movieService = movieService;
+    }
+
+    public RentServiceClient getRentService() {
+        return rentService;
+    }
+
+    public void setRentService(RentServiceClient rentService) {
+        this.rentService = rentService;
+    }
+
+    public ClientServiceClient getClientService() {
+        return clientService;
+    }
+
+    public void setClientService(ClientServiceClient clientService) {
+        this.clientService = clientService;
+    }
+
+
 
     // region Menus
     public void runConsole() {
@@ -210,13 +243,13 @@ public class Console {
 //        System.out.println("copies " + maxCopies);
         movies.removeIf(m->m.getAvailableCopies()!=maxCopies);
 //        System.out.println("movies " + movies);
-        Long movieId = movies.iterator().next().getId();
+        int movieId = movies.iterator().next().getId();
 //        System.out.println("moviedId " + movieId);
         rents.removeIf(r->r.getMovieId()!=movieId);
 //        System.out.println("rents " + rents);
-        Long clientId = rents.iterator().next().getClientId();
+        int clientId = rents.iterator().next().getClientCnp();
 //        System.out.println("clientId " + clientId);
-        clients.removeIf(c->c.getId()!=clientId);
+        clients.removeIf(c->c.getCnp()!=clientId);
         System.out.println("client: " + clients);
     }
 
@@ -278,11 +311,10 @@ public class Console {
         Movie movie;
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("id(int): ");
-            Long id = Long.valueOf(bufferRead.readLine());// ...
+            System.out.println("movie id(int): ");
+            int id = Integer.parseInt(bufferRead.readLine());
             if (id<0){
                 Movie m =  new Movie();
-                m.setId(id);
                 return m;
             }else{
                 System.out.println("movie name(string): ");
@@ -293,8 +325,7 @@ public class Console {
                 String type = bufferRead.readLine();
                 System.out.println("available copies(int): ");
                 int availableCopies = Integer.parseInt(bufferRead.readLine());// ...
-                movie = new Movie(name, director, type, availableCopies);
-                movie.setId(id);
+                movie = new Movie(id,name, director, type, availableCopies);
             }
             return movie;
         }catch (ValidatorException e){
@@ -312,7 +343,7 @@ public class Console {
         while (true) {
             try {
             Client cl = readClient();
-            if (cl == null || cl.getId() < 0)
+            if (cl == null || cl.getCnp() < 0)
                 break;
 
                 clientService.addClient(cl);
@@ -328,22 +359,20 @@ public class Console {
     }
 
     private Client readClient(){
-        System.out.println("Read Client {id, name, age}: ");
+        System.out.println("Read Client {cnp,name}: ");
 
         Client client;
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("id(int): ");
-            Long id = Long.valueOf(bufferRead.readLine());
-            if (id<0){
+            System.out.println("Cnp(int): ");
+            int cnp= Integer.parseInt(bufferRead.readLine());
+
+            if (cnp<0){
                 return null;
             }else{
                 System.out.println("Client name(string): ");
                 String name = bufferRead.readLine();
-                System.out.println("Age(int): ");
-                int age= Integer.parseInt(bufferRead.readLine());
-                client= new Client(name,age);
-                client.setId(id);
+                client= new Client(name,cnp);
             }
             return client;
         }catch (ValidatorException e){
@@ -385,30 +414,31 @@ public class Console {
 
     //region RentalService
     private void printAllRents() {
-        Set<Rent> rents =rentService.getAllRents();
-        rents.stream().forEach(System.out::println);
+        try{
+            Set<Rent> rents =rentService.getAllRents();
+            rents.stream().forEach(System.out::println);
+
+        }catch (RentalException e){
+            System.out.println(e);
+        }
     }
     private Rent readRental(){
 
-        System.out.println("Read Rental {ClientID, MovieID, Number of copies}: ");
+        System.out.println("Read Rental {MovieId, ClientCnp, Number of copies}: ");
 
         Rent rent;
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("id(int): ");
-            Long id = Long.valueOf(bufferRead.readLine());
-            if (id<0){
+            System.out.println("Movie ID(int): ");
+            int mID= Integer.parseInt(bufferRead.readLine());
+            if (mID<0){
                 return null;
             }else{
-
-                System.out.println("Client ID(int): ");
-                Long cID= Long.parseLong(bufferRead.readLine());
-                System.out.println("Movie ID(int): ");
-                Long mID= Long.parseLong(bufferRead.readLine());
-                System.out.println("Number of copies(int): ");
+                System.out.println("Client CNP(int): ");
+                int cID= Integer.parseInt(bufferRead.readLine());
+                 System.out.println("Number of copies(int): ");
                 int noc= Integer.parseInt(bufferRead.readLine());
                 rent =new Rent(cID,mID,noc);
-                rent.setId(id);
             }
             return rent;
         }catch (ValidatorException e){
@@ -424,7 +454,7 @@ public class Console {
         while (true) {
             try {
                 Rent r = readRental();
-                if (r == null || r.getId() < 0)
+                if (r == null || r.getClientCnp() < 0)
                     break;
 
                 rentService.addRent(r);

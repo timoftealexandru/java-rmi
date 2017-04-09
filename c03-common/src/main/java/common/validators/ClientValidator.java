@@ -11,11 +11,8 @@ public class ClientValidator implements Validator<Client> {
 
     @Override
     public void validate(Client client) throws ValidatorException {
-        if(client.getId() < 0){
-            throw new ValidatorException("Client Id must be positive !");
-        }
 
-        if(client.getAge() <14 || client.getAge() > 95){
+        if(client.getCnp() <14 || client.getCnp() > 95){
             throw new ValidatorException( "Client age not in range [14..95] !");
         }
 

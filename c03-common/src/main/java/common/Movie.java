@@ -1,12 +1,14 @@
 package common;
 
 import java.io.Serializable;
+import java.io.StreamCorruptedException;
 
 /**
  * Created by user on 3/5/2017.
  */
-public class Movie extends BaseEntity<Long> implements Serializable {
+public class Movie implements Serializable {
     //region Fields
+    private int id;
     private String name;
     private String director;
     private String genre;
@@ -15,8 +17,10 @@ public class Movie extends BaseEntity<Long> implements Serializable {
 
     //region Constructor
     public Movie(){
+        this.id=-1;
     }
-    public Movie(String name, String director, String type, int availableCopies) {
+    public Movie(int id,String name, String director, String type, int availableCopies) {
+        this.id=id;
         this.name = name;
         this.director = director;
         this.genre = type;
@@ -25,6 +29,10 @@ public class Movie extends BaseEntity<Long> implements Serializable {
     //endregion
 
     //region Methods
+    public int getId(){return this.id;}
+    public void setId(int id){
+        this.id=id;
+    }
     public String getName() {
         return this.name;
     }
@@ -59,6 +67,7 @@ public class Movie extends BaseEntity<Long> implements Serializable {
 
     public String toString() {
         return "Movie{" +
+                "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", director='" + director + '\'' +
                 ", genre='" + genre + '\'' +

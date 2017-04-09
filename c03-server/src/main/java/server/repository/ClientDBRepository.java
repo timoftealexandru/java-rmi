@@ -1,22 +1,43 @@
 package server.repository;
 
 import common.Client;
-import common.validators.RentalException;
-import common.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import org.springframework.stereotype.Repository;
+import server.uti.RentalException;
+=======
 import server.config.JdbcConfig;
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+import server.config.JdbcConfig;
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+import server.config.JdbcConfig;
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 
 /**
  * Created by victo on 3/19/2017.
  */
+<<<<<<< HEAD
+
+@Repository("clientDBRepository")
+public class ClientDBRepository {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate ;
+
+
+    public ClientDBRepository() {
+=======
 public class ClientDBRepository implements Repository<Long, Client> {
     private Validator<Client> validator;
     @Autowired
@@ -26,15 +47,64 @@ public class ClientDBRepository implements Repository<Long, Client> {
         this.validator = validator;
         this.jdbcTemplate = new JdbcConfig().jdbcTemplate();
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
     }
 
-    @Override
-    public Optional<Client> findOne(Long id) {
-        String sql = "select * from clients where id=?";
-        Client c = jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Client.class), id);
-        return Optional.of(c);
+
+    public Optional<Client> findOne(int cnp) {
+        try{
+            String sql = "select * from clients where cnp=?";
+            Client c = jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Client.class), cnp);
+            return Optional.of(c);
+        } catch (DataAccessException e) {
+            throw new RentalException("Could not execute query to find clients ", e);
+        }
+
     }
+
     public List<Client> findAll() {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        try {
+            String sql = "select * from clients";
+            return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Client.class));
+
+        } catch (DataAccessException e) {
+            throw new RentalException("Could not execute query to find clients ", e);
+        }
+    }
+
+    public Optional<Client> save(Client c) {
+        String sql = "insert into clients (name,cnp) values (?,?)";
+        jdbcTemplate.update(sql, c.getName(), c.getCnp());
+        return Optional.empty();
+    }
+
+    public Optional<Client> update(Client c) {
+        String sql = "update clients set name=? where cnp=?";
+        jdbcTemplate.update(sql, c.getName(), c.getCnp());
+        return Optional.empty();
+    }
+
+
+    public Optional<Client> delete(int cnp) {
+        String sql = "delete from clients where cnp=?";
+        jdbcTemplate.update(sql, cnp);
+        return Optional.empty();
+    }
+
+=======
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
         String sql = "select * from clients";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Client.class));
     }
@@ -61,6 +131,13 @@ public class ClientDBRepository implements Repository<Long, Client> {
         String sql = "select count(*) from clients";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
 
 }
 
@@ -75,7 +152,19 @@ public class ClientDBRepository implements Repository<Long, Client> {
 //             PreparedStatement statement = connection.prepareStatement(
 //                     "insert into clients (name, age) values (?,?)")) {
 //            statement.setString(1, entity.getName());
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+//            statement.setInt(2, entity.getCnp());
+=======
 //            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+//            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+//            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
 //
 //            statement.executeUpdate();
 //
@@ -116,7 +205,19 @@ public class ClientDBRepository implements Repository<Long, Client> {
 //             PreparedStatement statement = connection.prepareStatement(
 //                     "update client set (name=?,age=?) WHERE id=?")) {
 //            statement.setString(1, entity.getName());
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+//            statement.setInt(2, entity.getCnp());
+=======
 //            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+//            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+//            statement.setInt(2, entity.getAge());
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
 //            statement.setLong(3, entity.getId());
 //
 //            statement.executeUpdate();

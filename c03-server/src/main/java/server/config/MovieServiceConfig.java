@@ -12,17 +12,19 @@ import server.service.MovieServiceImpl;
  */
 @Configuration
 public class MovieServiceConfig {
+
     @Bean
-    public MovieService movieService(){
+    public MovieService movieService() {
         return new MovieServiceImpl();
     }
 
-    @Bean
+    @Bean("rmiMovieService")
     public RmiServiceExporter rmiServiceExporter(){
         RmiServiceExporter exporter = new RmiServiceExporter();
         exporter.setServiceName("MovieService");
         exporter.setServiceInterface(MovieService.class);
         exporter.setService(movieService());
+        exporter.setRegistryPort(9009);
         return exporter;
     }
 }

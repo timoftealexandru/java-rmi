@@ -2,13 +2,18 @@ package client.service;
 import common.Client;
 import common.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
 /**
  * Created by Nicu on 4/1/17.
  */
 
+@Service
 public class ClientServiceClient implements ClientService {
+
     @Autowired
     private ClientService clientService;
 

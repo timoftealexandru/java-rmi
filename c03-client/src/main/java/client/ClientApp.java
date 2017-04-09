@@ -14,13 +14,16 @@ public class ClientApp {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("client.config");
 
-        MovieServiceClient movieService = context.getBean(MovieServiceClient.class);
-        ClientServiceClient clientService = context.getBean(ClientServiceClient.class);
-        RentServiceClient rentService = context.getBean(RentServiceClient.class);
+//        MovieServiceClient movieService = context.getBean(MovieServiceClient.class);
+//        RentServiceClient rentService = context.getBean(RentServiceClient.class);
+//        ClientServiceClient clientService = context.getBean(ClientServiceClient.class);
+//
+//        Console console;
+//
+//        console = new Console();
+//        console.runConsole();
 
-        Console console;
-
-        console = new Console(movieService, clientService, rentService);
+        Console console = context.getBean(Console.class);
         console.runConsole();
 
     }

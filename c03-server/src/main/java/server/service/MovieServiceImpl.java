@@ -3,10 +3,9 @@ package server.service;
 
 import common.Movie;
 import common.MovieService;
-import common.validators.ClientValidator;
-import common.validators.MovieValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import server.repository.MovieDBRepository;
-import server.repository.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,14 +14,31 @@ import java.util.stream.StreamSupport;
 /**
  * Created by Nicu on 3/5/2017.
  */
-
+@Service
 public class MovieServiceImpl implements MovieService {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+    @Autowired
+    private MovieDBRepository repository;
+=======
     private MovieValidator movieValidator = new MovieValidator();
     private MovieDBRepository repository = new MovieDBRepository(movieValidator);
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+    private MovieValidator movieValidator = new MovieValidator();
+    private MovieDBRepository repository = new MovieDBRepository(movieValidator);
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
+=======
+    private MovieValidator movieValidator = new MovieValidator();
+    private MovieDBRepository repository = new MovieDBRepository(movieValidator);
+>>>>>>> 8e7da753f0004969eed9d95df6cfae6eaa2f91e6
 
     public MovieServiceImpl() {
 
     }
+
 
     public void addMovie(Movie movie) {
         repository.save(movie);

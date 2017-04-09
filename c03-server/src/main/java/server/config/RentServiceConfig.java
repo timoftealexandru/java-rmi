@@ -12,16 +12,17 @@ import server.service.RentServiceImpl;
 @Configuration
 public class RentServiceConfig {
     @Bean
-    public RentService clientService(){
+    public RentService rentService(){
         return new RentServiceImpl();
     }
 
-    @Bean
+    @Bean("rmiRentService")
     public RmiServiceExporter rmiServiceExporter(){
         RmiServiceExporter exporter = new RmiServiceExporter();
         exporter.setServiceName("RentService");
         exporter.setServiceInterface(RentService.class);
-        exporter.setService(clientService());
+        exporter.setService(rentService());
+        exporter.setRegistryPort(9009);
         return exporter;
     }
 }

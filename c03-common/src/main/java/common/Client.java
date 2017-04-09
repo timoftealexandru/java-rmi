@@ -5,19 +5,21 @@ import java.io.Serializable;
 /**
  * Created by user on 3/7/2017.
  */
-public class Client extends BaseEntity<Long> implements Serializable{
+public class Client implements Serializable{
     //region Fields
     private String name;
-    private int age;
+    private int cnp;
 //    List<Long> rentedMovies; // the rented movies this client has currently in his possession
     //endregion
 
     //region Constructor
-    public Client() {}
+    public Client() {
+        this.cnp=-1;
+    }
 
-    public Client(String name, int age) {
+    public Client(String name, int cnp) {
         this.name = name;
-        this.age = age;
+        this.cnp = cnp;
     }
     //endregion
 
@@ -30,18 +32,18 @@ public class Client extends BaseEntity<Long> implements Serializable{
         this.name = name;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setCnp(int cnp) {
+        this.cnp = cnp;
     }
 
-    public int getAge() {
-        return age;
+    public int getCnp() {
+        return cnp;
     }
 
     public String toString() {
         return "Client{" +
                 "name='" + name + '\'' +
-                ", age='" + age +
+                ", cnp='" + cnp +
                 "} " + super.toString();
     }//endregion
 }

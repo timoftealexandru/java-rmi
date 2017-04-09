@@ -1,6 +1,6 @@
 allprojects {
 
-    group 'ro.ubb.c03'
+    group 'c03'
     version '1.0-SNAPSHOT'
 
     apply plugin: 'java'

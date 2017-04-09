@@ -5,13 +5,18 @@ import common.MovieService;
 import common.Rent;
 import common.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
 /**
  * Created by Nicu on 4/1/17.
  */
 
+@Service
 public class RentServiceClient implements RentService {
+
     @Autowired
     private RentService rentService;
 
@@ -37,7 +42,7 @@ public class RentServiceClient implements RentService {
 
     @Override
     public void updateRent(Rent rent){
-        updateRent(rent);
+        rentService.updateRent(rent);
     }
 
 }
